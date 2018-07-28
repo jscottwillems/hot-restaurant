@@ -13,3 +13,38 @@ app.use(bodyParser.json());
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
 });
+
+
+
+app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "index.html"));
+  });
+  
+  app.get("/waitlist", function(req, res) {
+    res.sendFile(path.join(__dirname, "waitlist.html"));
+  });
+  
+  app.get("/reservations", function(req, res) {
+    res.sendFile(path.join(__dirname, "reserve.html"));
+  });
+
+  app.get("/api/tables", function(req, res) {
+    return res.json(tables);
+  });
+
+ 
+
+  app.post("/api/tables", function(req, res) {
+    var newTable = req.body;
+
+    console.log(newTable);
+  
+    table.push(newTable);
+  
+    res.json(newTable);
+  });
+
+
+  var table = [];
+
+  var waitlist = [];
