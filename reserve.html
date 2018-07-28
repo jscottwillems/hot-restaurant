@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
 
-    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -27,8 +26,8 @@
             <hr class="my-4">
             <h2>Make your reservation below.</h2>
             <br>
-            <a class="btn btn-primary btn-lg" href="waitlist.html" role="button">View Tables</a>
-            <a class="btn btn-primary btn-lg" href="index.html" role="button">Home</a>
+            <a class="btn btn-primary btn-lg" href="/waitlist" role="button">View Tables</a>
+            <a class="btn btn-primary btn-lg" href="/" role="button">Home</a>
         </div>
 
         <div class="card" style="width: full;">
@@ -77,7 +76,28 @@
         </footer>
     </div>
 
-    <script type="text/javascript" src="server.js"></script>
+    <script type="text/javascript">
+        $("#formSubmit").on("click", function (event) {
+            event.preventDefault();
+            var newTable = {
+                name: $("#guestName").val().trim(),
+                phone: $("#guestPhone").val().trim(),
+                email: $("#guestEmail").val().trim(),
+                id: $("#guestID").val().trim(),
+            };
+
+
+
+            // Question: What does this code do??
+            $.post("/api/tables", newTable)
+                .then(function (data) {
+                    console.log("reserve.html", data);
+                    $("#guestName").val(" "); 
+                    $("#guestPhone").val(" "); 
+                    $("#guestEmail").val(" "); 
+                    $("#guestID").val(" ");
+                });
+        });</script>
 
 </body>
 

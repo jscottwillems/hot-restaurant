@@ -32,8 +32,12 @@ app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "reserve.html"));
   });
 
-  app.get("/api/tables", function(req, res) {
-    return res.json(tables);
+  app.get("/api/tables", function(req, res) { 
+    return res.json(table); 
+  });
+
+  app.get("/api/waitlist", function(req, res) {
+    return res.json(waitlist);
   });
 
  
@@ -41,12 +45,9 @@ app.get("/", function(req, res) {
   app.post("/api/tables", function(req, res) {
     var newTable = req.body;
 
-    console.log(newTable);
-
-  if (table.length < 4) {
+  if (table.length < 5) {
         table.push(newTable);
         res.json(newTable);
-
   } else {
       waitlist.push(newTable)
       res.json(newTable);
@@ -55,4 +56,4 @@ app.get("/", function(req, res) {
 
   });
 
-  var waitlist = [];
+
