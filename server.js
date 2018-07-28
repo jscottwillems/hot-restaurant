@@ -16,6 +16,10 @@ app.listen(PORT, function() {
 
 
 
+var table = [];
+var waitlist = [];
+
+
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
   });
@@ -38,13 +42,16 @@ app.get("/", function(req, res) {
     var newTable = req.body;
 
     console.log(newTable);
-  
-    table.push(newTable);
-  
-    res.json(newTable);
+
+  if (table.length < 4) {
+        table.push(newTable);
+        res.json(newTable);
+
+  } else {
+      waitlist.push(newTable)
+      res.json(newTable);
+  }
+   
+
   });
 
-
-  var table = [];
-
-  var waitlist = [];
